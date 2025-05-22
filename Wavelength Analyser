@@ -1,0 +1,29 @@
+# define variables
+pointA = 181
+WLpointA = 656
+pointB = 547
+WLpointB = 486
+
+def pixel_to_wavelength(pixel):
+    return WLpointA + (pixel - pointA) * (WLpointB - WLpointA) / (pointB - pointA)
+import cv2
+import matplotlib.pyplot as plt
+
+# Load image - label it spectrum
+img = cv2.imread("spectrum.jpg")
+gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+
+# Pick a horizontal line (e.g., row 100)
+intensity = gray[100]
+
+# Convert pixel positions to wavelengths
+pixels = range(len(intensity))
+wavelengths = [pixel_to_wavelength(p) for p in pixels]
+
+# Plot
+plt.plot(wavelengths, intensity)
+plt.xlabel("Wavelength (nm)")
+plt.ylabel("Intensity")
+plt.title("Spectrum Intensity vs. Wavelength")
+plt.grid(True)
+plt.show()
