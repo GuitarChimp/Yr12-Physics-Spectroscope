@@ -1,0 +1,20 @@
+import cv2
+import matplotlib.pyplot as plt
+
+# Load the image
+img = cv2.imread('spectrum.jpg')
+
+# Convert it to grayscale (brightness only)
+gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+
+# Pick a row from the image (change 100 if needed)
+row_index = 100
+intensity = gray[row_index]
+
+# Plot intensity along the row
+plt.plot(intensity)
+plt.xlabel("Pixel Position")
+plt.ylabel("Brightness")
+plt.title("Find Bright Peaks = Known Colours")
+plt.grid(True)
+plt.show()
